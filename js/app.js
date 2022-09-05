@@ -8,8 +8,7 @@ const form = document.querySelector("form");
 const VALUE = 150;
 let links = null;
 
-/* Build the nav*/
-
+// Build the nav
 navList.innerHTML = "";
 
 sections.forEach((section) => {
@@ -20,10 +19,11 @@ sections.forEach((section) => {
   `;
 });
 
+// Assign links after building nav
 links = document.querySelectorAll(".menu__link");
 
-// Helper Function
-function makeActive() {
+// Make Active Function
+const makeActive = () => {
   for (const section of sections) {
     const box = section.getBoundingClientRect();
     //Find a value that works best, but 150 seems to be a good start.
@@ -34,7 +34,7 @@ function makeActive() {
 
       links.forEach((link) => {
         if (link.dataset.nav === section.dataset.nav) {
-          link.classList.add("your-active-class");
+          link.classList.add("active");
         }
       });
     } else {
@@ -44,12 +44,15 @@ function makeActive() {
 
       links.forEach((link) => {
         if (link.dataset.nav === section.dataset.nav) {
-          link.classList.remove("your-active-class");
+          link.classList.remove("active");
         }
       });
     }
   }
-}
+};
+
+// Make sections active
+document.addEventListener("scroll", () => makeActive());
 
 // Apply smooth scrolling
 links.forEach((link) => {
@@ -64,35 +67,22 @@ links.forEach((link) => {
   });
 });
 
-// Make sections active
-document.addEventListener("scroll", () => makeActive());
-
-//Form Submission
+// Form Submission
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const name = `${document.getElementById("fname").value} ${
-    document.getElementById("lname").value
-  }`;
+  const firstName = document.getElementById("fname").value;
+  const lastName = document.getElementById("lname").value;
   const email = document.getElementById("email").value;
   const msg = document.getElementById("subject").value || "NO MESSAGE";
 
   const subscription = {
-    name,
+    name: `${firstName} ${lastName}`,
     email,
     msg,
   };
 
-  alert(
-    JSON.stringify(
-      {
-        status: "success",
-        subscription,
-      },
-      null,
-      3
-    )
-  );
+  alert(JSON.stringify({ status: "success", subscription }, null, 3));
 
   form.reset();
 });
