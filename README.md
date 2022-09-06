@@ -21,5 +21,5 @@ to ensure smooth scrolling.
 
 ## CSS
 
-The website is responsive across devices: smartphones, tablets and desktop. Theb navigation bar adjusts to a
+The website is responsive across devices: smartphones, tablets and desktop. The navigation bar adjusts to a
 smaller size on smartphones to achieve this.
